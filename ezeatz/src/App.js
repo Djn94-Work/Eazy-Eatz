@@ -8,9 +8,28 @@ class App extends React.Component {
     this.state = { address: "" };
   }
 
-  handleSubmit = () => {
-    //this function will initiate a search(prob should rename)
-    window.alert("Wowee this is the adrress: " + this.state.address);
+  handleSubmit = key => {
+    if (key === "Enter") {
+      const key = "";
+      /*const locationVars = { address: "", key: "" };
+      let googleLocation = fetch(
+        "https://maps.googleapis.com/maps/api/geocode/",
+        locationVars
+      );*/
+      const restaurantVars = {
+        location: "29.5723528,-95.4109034",
+        radius: 4444, //pass an int
+        type: "restaurant",
+        keyword: "burger",
+        key: key
+      };
+      fetch(
+        "https://maps.googleapis.com/maps/api/place/nearbysearch/",
+        restaurantVars
+      )
+        .then(resp => resp.json())
+        .then(final => console.log(final));
+    }
   };
 
   handleOnChange = address => {

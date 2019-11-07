@@ -4,7 +4,7 @@ function AddressForm(props) {
   return (
     <input
       placeholder="Location"
-      onSubmit={props.handleSubmit}
+      onKeyDown={event => props.handleSubmit(event.key)}
       onChange={event => props.handleOnChange(event.target.value)}
     ></input>
   );
