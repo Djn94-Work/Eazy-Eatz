@@ -3,7 +3,6 @@ import "./App.css";
 import Header from "./header/Header";
 import google from "google-maps-react";
 
-const test = require("dotenv").config().parsed;
 const axios = require("axios");
 
 service = new google.maps.places.PlacesService(map);

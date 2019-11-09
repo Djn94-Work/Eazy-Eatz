@@ -1,9 +1,10 @@
+require("dotenv").config();
+
 const axios = require("axios");
 let keyword = "burger";
 let address = "403 commons trail ln huffman tx";
-let key = "";
+let key = process.env.GMAPS_KEY;
 let radius = 2000;
-
 const express = require("express");
 const PORT = process.env.PORT || 8080;
 const app = express();
