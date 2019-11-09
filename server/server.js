@@ -1,4 +1,10 @@
-/*const express = require("express");
+const axios = require("axios");
+let keyword = "burger";
+let address = "403 commons trail ln huffman tx";
+let key = "AIzaSyCB_pxu8oBdjMN9fP_KgnPaMqTwYw0qPFs";
+let radius = 2000;
+
+const express = require("express");
 const PORT = process.env.PORT || 8080;
 const app = express();
 app.use(express.urlencoded({ extended: true }));
@@ -7,17 +13,11 @@ app.get("/pls", function(req, res) {
   res.send("Ez-EaTZ");
 });
 
-app.listen(process.env.PORT || PORT, function() {
-  console.log(`server listening on ${PORT}`);
-});*/
-
-const axios = require("axios");
-
 axios
   .get(`https://maps.googleapis.com/maps/api/geocode/json?`, {
     params: {
-      address: "2202 Signal hill dr pearland tx",
-      key: "AIzaSyCB_pxu8oBdjMN9fP_KgnPaMqTwYw0qPFs"
+      address: address,
+      key: key
     }
   })
   .then(locations => {
@@ -27,11 +27,18 @@ axios
       .get("https://maps.googleapis.com/maps/api/place/nearbysearch/json?", {
         params: {
           location: lat + "," + lng,
-          radius: 4444,
-          keyword: "burger",
-          key: "AIzaSyCB_pxu8oBdjMN9fP_KgnPaMqTwYw0qPFs"
+          radius: radius,
+          keyword: keyword,
+          key: key
         }
       })
-      .then(restaurants => console.log(restaurants.data.results));
+      .then(restaurants =>
+        app.get("/search", (req, res) => {
+          res.send(restaurants.data.results);
+        })
+      );
   });
 //console.log(ans);
+app.listen(process.env.PORT || PORT, function() {
+  console.log(`server listening on ${PORT}`);
+});
