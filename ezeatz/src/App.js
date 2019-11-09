@@ -1,12 +1,8 @@
 import React from "react";
 import "./App.css";
 import Header from "./header/Header";
-import google from "google-maps-react";
 
 const axios = require("axios");
-
-service = new google.maps.places.PlacesService(map);
-service.nearbySearch(request, callback);
 
 class App extends React.Component {
   constructor(props) {
@@ -14,11 +10,15 @@ class App extends React.Component {
     this.state = { address: "" };
   }
   handleSubmit = (key, address) => {
-    console.log(test);
     this.setState({ address: address });
     if (key === "Enter") {
+      axios
+        .get("http://localhost:8080/search", { params: { address: address } })
+        .then(results => {
+          console.log("here");
+          console.log(results.data);
+        });
     }
-    console.log(this.results);
   };
 
   render() {
