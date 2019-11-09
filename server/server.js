@@ -32,11 +32,23 @@ axios
           key: key
         }
       })
-      .then(restaurants =>
+      .then(restaurants => {
+        let results = {};
+        restaurants = restaurants.data.results;
+        for (const entry in restaurants) {
+          results[entry] = {
+            name: restaurants[entry].name,
+            address: restaurants[entry].vicinity,
+            open: restaurants[entry].opening_hours.open_now,
+            rating: restaurants[entry].rating,
+            user_ratings_total: restaurants[entry].user_ratings_total,
+            icon: restaurants[entry].icon
+          };
+        }
         app.get("/search", (req, res) => {
-          res.send(restaurants.data.results);
-        })
-      );
+          res.send(results);
+        });
+      });
   });
 //console.log(ans);
 app.listen(process.env.PORT || PORT, function() {
