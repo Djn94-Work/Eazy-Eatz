@@ -1,7 +1,7 @@
 const axios = require("axios");
 let keyword = "burger";
 let address = "403 commons trail ln huffman tx";
-let key = "AIzaSyCB_pxu8oBdjMN9fP_KgnPaMqTwYw0qPFs";
+let key = "";
 let radius = 2000;
 
 const express = require("express");
@@ -50,7 +50,6 @@ axios
         });
       });
   });
-//console.log(ans);
 app.listen(process.env.PORT || PORT, function() {
   console.log(`server listening on ${PORT}`);
 });
