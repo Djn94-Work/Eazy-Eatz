@@ -1,5 +1,7 @@
 require("dotenv").config();
 
+var fs = require("fs");
+
 const axios = require("axios");
 
 const PORT = process.env.PORT || 8080;
@@ -12,7 +14,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 let keyword = "burger";
-let address = "403 commons trail ln huffman tx";
 let key = process.env.GMAPS_KEY;
 let radius = 2000;
 
@@ -54,6 +55,7 @@ app.get("/search", (req, res) => {
               icon: restaurants[entry].icon
             };
           }
+          fs.writeFile("results.json", JSON.stringify(results), () => {});
           res.send(results);
         });
     });

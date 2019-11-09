@@ -7,7 +7,7 @@ const axios = require("axios");
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { address: "" };
+    this.state = { address: "", restaurants: {} };
   }
   handleSubmit = (key, address) => {
     this.setState({ address: address });
@@ -15,18 +15,19 @@ class App extends React.Component {
       axios
         .get("http://localhost:8080/search", { params: { address: address } })
         .then(results => {
-          console.log("here");
-          console.log(results.data);
+          this.setState({ restaurants: results.data });
         });
     }
   };
 
   render() {
     return (
-      <Header
-        handleSubmit={this.handleSubmit}
-        handleOnChange={this.handleOnChange}
-      ></Header>
+      <div>
+        <Header
+          handleSubmit={this.handleSubmit}
+          handleOnChange={this.handleOnChange}
+        ></Header>
+      </div>
     );
   }
 }
