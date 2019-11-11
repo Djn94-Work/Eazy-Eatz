@@ -37,7 +37,7 @@ app.get("/search", (req, res) => {
         .get("https://maps.googleapis.com/maps/api/place/nearbysearch/json?", {
           params: {
             location: lat + "," + lng,
-            radius: radius,
+            radius: parseInt(req.query.radius) * 1609.344, //converts the miles to meters
             keyword: keyword,
             key: key
           }
