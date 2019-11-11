@@ -15,6 +15,7 @@ class App extends React.Component {
       axios
         .get("http://localhost:8080/search", { params: { address: address } })
         .then(results => {
+          console.log(results.data);
           this.setState({ restaurants: results.data });
         });
     }
