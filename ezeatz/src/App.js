@@ -1,31 +1,33 @@
 import React from "react";
 import "./App.css";
 import Header from "./header/Header";
-import google from "google-maps-react";
-const test = require("dotenv").config().parsed;
 
-service = new google.maps.places.PlacesService(map);
-service.nearbySearch(request, callback);
+const axios = require("axios");
 
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { address: "" };
+    this.state = { address: "", restaurants: {} };
   }
   handleSubmit = (key, address) => {
-    console.log(test);
     this.setState({ address: address });
     if (key === "Enter") {
+      axios
+        .get("http://localhost:8080/search", { params: { address: address } })
+        .then(results => {
+          this.setState({ restaurants: results.data });
+        });
     }
-    console.log(this.results);
   };
 
   render() {
     return (
-      <Header
-        handleSubmit={this.handleSubmit}
-        handleOnChange={this.handleOnChange}
-      ></Header>
+      <div>
+        <Header
+          handleSubmit={this.handleSubmit}
+          handleOnChange={this.handleOnChange}
+        ></Header>
+      </div>
     );
   }
 }
