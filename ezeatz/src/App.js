@@ -2,6 +2,7 @@ import React from "react";
 import "./App.css";
 import Header from "./header/Header";
 import FilterPannel from "./mainpage/FilterPannel/FilterPannel";
+import CardContainer from "./mainpage/Cards/CardContainer";
 
 const axios = require("axios");
 
@@ -23,8 +24,8 @@ class App extends React.Component {
           params: { address: address, radius: this.state.radius }
         })
         .then(results => {
-          console.log(results.data);
           this.setState({ restaurants: results.data });
+          console.log(this.state.restaurants);
         });
     }
   };
@@ -36,10 +37,8 @@ class App extends React.Component {
           handleSubmit={this.handleSubmit}
           handleOnChange={this.handleOnChange}
         ></Header>
-        <FilterPannel
-          handleSlide={this.handleSlide}
-          radius={this.state.radius}
-        />
+        <FilterPannel handleSlide={this.handleSlide} />
+        <CardContainer RestaurantDetails={this.state.restaurants} />
       </div>
     );
   }
