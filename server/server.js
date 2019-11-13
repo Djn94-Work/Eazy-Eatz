@@ -15,7 +15,6 @@ app.use(express.json());
 
 let keyword = "burger";
 let key = process.env.GMAPS_KEY;
-let radius = 2000;
 
 app.get("/pls", function(req, res) {
   res.send("Ez-EaTZ");
@@ -45,17 +44,32 @@ app.get("/search", (req, res) => {
         .then(restaurants => {
           let results = {};
           restaurants = restaurants.data.results;
+          console.log(restaurants);
           for (const entry in restaurants) {
+            let params = {
+              maxwidth: restaurants[entry].photos[0].width,
+              photoreference: restaurants[entry].photos[0].photo_reference,
+              key: key
+            };
+
             results[entry] = {
               name: restaurants[entry].name,
               address: restaurants[entry].vicinity,
               open: restaurants[entry].opening_hours.open_now,
               rating: restaurants[entry].rating,
               user_ratings_total: restaurants[entry].user_ratings_total,
-              icon: restaurants[entry].icon
+              // new Image().src(
+              icon:
+                "https://maps.googleapis.com/maps/api/place/photo?maxwidth=" +
+                params.maxwidth +
+                "&photoreference=" +
+                params.photoreference +
+                "&key=" +
+                key
+              //)
             };
           }
-          fs.writeFile("results.json", JSON.stringify(results), () => {});
+          //fs.writeFile("results.json", JSON.stringify(results), () => {});
           res.send(results);
         });
     });
