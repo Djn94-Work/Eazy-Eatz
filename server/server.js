@@ -42,40 +42,44 @@ app.get("/search", (req, res) => {
           }
         })
         .then(restaurants => {
+          this.image = {};
           let results = {};
           restaurants = restaurants.data.results;
-          console.log(restaurants[0].photos);
           for (const entry in restaurants) {
-            let params = {
-              maxwidth: restaurants[entry].photos[0].width,
-              photoreference: restaurants[entry].photos[0].photo_reference,
-              key: key
-            };
-
             results[entry] = {
               name: restaurants[entry].name,
               address: restaurants[entry].vicinity,
               open: restaurants[entry].opening_hours.open_now,
               rating: restaurants[entry].rating,
               user_ratings_total: restaurants[entry].user_ratings_total,
-              icon:
-                "https://maps.googleapis.com/maps/api/place/photo?maxwidth=" +
-                params.maxwidth +
-                "&photoreference=" +
-                params.photoreference +
-                "&key=" +
-                key
+              icon: ""
             };
-
-            axios
-              .get(
-                "https://maps.googleapis.com/maps/api/place/photo?maxwidth=393&photoreference=CmRaAAAAEJRSJA8qSkkEC9CcTceOPh8gHatu5Q9UGxnuv-Bgu0UUnzUeHvItJ0xkhbRDlRSrurKGqEC9CeI6oITtI1CTqYyi2RgVTfgbYDgmqx-Qf15yRGoPANLc4XU9MlAzKEfFEhCrri_R-DUvZfxnYb8cTnshGhQq79Vibm9fKhVjTG_XGEDGDJLzkg&key=AIzaSyCk0of6o-JuJc3PLuYzOUiXX7r3oOxG010"
-              )
-              .then(image =>
-                console.log(image.request._redirectable._options.href)
+            getImage = async () => {
+              let imgRes = await axios.get(
+                "https://maps.googleapis.com/maps/api/place/photo?",
+                {
+                  params: {
+                    maxwidth: restaurants[entry].photos[0].width,
+                    photoreference:
+                      restaurants[entry].photos[0].photo_reference,
+                    key: key
+                  }
+                }
               );
+              results[entry].icon = imgRes.request._redirectable._options.href;
+              res.write(
+                JSON.stringify({
+                  entry: results[entry]
+                })
+              );
+
+              if (entry === (Object.keys(results).length - 1).toString()) {
+                console.log("here");
+                res.end();
+              }
+            };
+            getImage();
           }
-          res.send(results);
         });
     });
 });
