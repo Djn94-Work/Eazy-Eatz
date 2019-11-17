@@ -54,33 +54,41 @@ app.get("/search", (req, res) => {
               user_ratings_total: restaurants[entry].user_ratings_total,
               icon: ""
             };
-            getImage = async () => {
-              let imgRes = await axios.get(
-                "https://maps.googleapis.com/maps/api/place/photo?",
-                {
-                  params: {
-                    maxwidth: restaurants[entry].photos[0].width,
-                    photoreference:
-                      restaurants[entry].photos[0].photo_reference,
-                    key: key
-                  }
+            /*axios
+              .get("https://maps.googleapis.com/maps/api/place/photo?", {
+                params: {
+                  maxwidth: restaurants[entry].photos[0].width,
+                  photoreference: restaurants[entry].photos[0].photo_reference,
+                  key: key
                 }
-              );
-              results[entry].icon = imgRes.request._redirectable._options.href;
-              res.write(
-                JSON.stringify({
-                  entry: results[entry]
-                })
-              );
-
-              if (entry === (Object.keys(results).length - 1).toString()) {
-                console.log("here");
-                res.end();
-              }
-            };
-            getImage();
+              })
+              .then(imgRes => {
+                results[entry].icon =
+                  imgRes.request._redirectable._options.href;
+                if (entry === (Object.keys(results).length - 1).toString()) {
+                  res.send(results);
+                }
+              })*/
           }
-        });
+          return { results, restaurants };
+        })
+        .then((results, restaurants) =>
+          axios
+            .get("https://maps.googleapis.com/maps/api/place/photo?", {
+              params: {
+                maxwidth: restaurants[entry].photos[0].width,
+                photoreference: restaurants[entry].photos[0].photo_reference,
+                key: key
+              }
+            })
+            .then(imgRes => {
+              for (const entry in results) {
+                results[entry].icon =
+                  imgRes.request._redirectable._options.href;
+              }
+              res.send(results);
+            })
+        );
     });
 });
 app.listen(process.env.PORT || PORT, function() {
