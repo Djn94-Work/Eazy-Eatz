@@ -25,7 +25,7 @@ class App extends React.Component {
         })
         .then(results => {
           this.setState({ restaurants: results.data });
-          console.log(results);
+          console.log(results.data);
         });
     }
   };

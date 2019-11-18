@@ -54,41 +54,32 @@ app.get("/search", (req, res) => {
               user_ratings_total: restaurants[entry].user_ratings_total,
               icon: ""
             };
-            /*axios
-              .get("https://maps.googleapis.com/maps/api/place/photo?", {
+          }
+          return { results, restaurants };
+        })
+        .then(contents => {
+          let results = contents.results;
+          let restaurants = contents.restaurants;
+          let promises = [];
+          for (const entry in results) {
+            promises.push(
+              axios.get("https://maps.googleapis.com/maps/api/place/photo?", {
                 params: {
                   maxwidth: restaurants[entry].photos[0].width,
                   photoreference: restaurants[entry].photos[0].photo_reference,
                   key: key
                 }
               })
-              .then(imgRes => {
-                results[entry].icon =
-                  imgRes.request._redirectable._options.href;
-                if (entry === (Object.keys(results).length - 1).toString()) {
-                  res.send(results);
-                }
-              })*/
+            );
           }
-          return { results, restaurants };
-        })
-        .then((results, restaurants) =>
-          axios
-            .get("https://maps.googleapis.com/maps/api/place/photo?", {
-              params: {
-                maxwidth: restaurants[entry].photos[0].width,
-                photoreference: restaurants[entry].photos[0].photo_reference,
-                key: key
-              }
-            })
-            .then(imgRes => {
-              for (const entry in results) {
-                results[entry].icon =
-                  imgRes.request._redirectable._options.href;
-              }
-              res.send(results);
-            })
-        );
+          Promise.all(promises).then((images)=>{
+             for(let i = 0; i < images.length; i++){
+               results[i.toString()].icon = images[i].request._redirectable._options.href
+             }
+             res.send(results)
+
+          }).catch(e=>console.log(e))
+        });
     });
 });
 app.listen(process.env.PORT || PORT, function() {
