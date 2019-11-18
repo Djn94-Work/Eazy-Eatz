@@ -9,11 +9,16 @@ const axios = require("axios");
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { address: "", radius: 0, restaurants: {} };
+    this.state = { address: "", radius: 0, restaurants: {}, filter: "" };
   }
 
   handleSlide = rad => {
     this.setState({ radius: rad });
+  };
+
+  handleFilter = filter => {
+    this.setState({ filter: filter });
+    console.log(this.state.filter);
   };
 
   handleSubmit = (key, address) => {
@@ -21,7 +26,11 @@ class App extends React.Component {
     if (key === "Enter") {
       axios
         .get("http://localhost:8080/search", {
-          params: { address: address, radius: this.state.radius }
+          params: {
+            address: address,
+            filter: this.state.filter,
+            radius: this.state.radius
+          }
         })
         .then(results => {
           this.setState({ restaurants: results.data });
@@ -37,7 +46,10 @@ class App extends React.Component {
           handleSubmit={this.handleSubmit}
           handleOnChange={this.handleOnChange}
         ></Header>
-        <FilterPannel handleSlide={this.handleSlide} />
+        <FilterPannel
+          handleSlide={this.handleSlide}
+          handleFilter={this.handleFilter}
+        />
         <CardContainer RestaurantDetails={this.state.restaurants} />
       </div>
     );

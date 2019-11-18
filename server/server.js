@@ -13,7 +13,6 @@ app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-let keyword = "burger";
 let key = process.env.GMAPS_KEY;
 
 app.get("/pls", function(req, res) {
@@ -21,7 +20,7 @@ app.get("/pls", function(req, res) {
 });
 
 app.get("/search", (req, res) => {
-  console.log(req.query.address);
+  // console.log(req.query.address);
   axios
     .get(`https://maps.googleapis.com/maps/api/geocode/json?`, {
       params: {
@@ -37,7 +36,7 @@ app.get("/search", (req, res) => {
           params: {
             location: lat + "," + lng,
             radius: parseInt(req.query.radius) * 1609.344, //converts the miles to meters
-            keyword: keyword,
+            keyword: req.query.filter,
             key: key
           }
         })
@@ -45,6 +44,7 @@ app.get("/search", (req, res) => {
           this.image = {};
           let results = {};
           restaurants = restaurants.data.results;
+          console.log(restaurants[0]);
           for (const entry in restaurants) {
             results[entry] = {
               name: restaurants[entry].name,
@@ -72,13 +72,15 @@ app.get("/search", (req, res) => {
               })
             );
           }
-          Promise.all(promises).then((images)=>{
-             for(let i = 0; i < images.length; i++){
-               results[i.toString()].icon = images[i].request._redirectable._options.href
-             }
-             res.send(results)
-
-          }).catch(e=>console.log(e))
+          Promise.all(promises)
+            .then(images => {
+              for (let i = 0; i < images.length; i++) {
+                results[i.toString()].icon =
+                  images[i].request._redirectable._options.href;
+              }
+              res.send(results);
+            })
+            .catch(e => console.log(e));
         });
     });
 });
