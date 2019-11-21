@@ -21,28 +21,34 @@ export default function RestCard(props) {
 
   return (
     <Card className={classes.card}>
-      <CardHeader
-        title={props.title}
-        subheader={() => {
-          let resp = "";
-          if (props.open) {
-            resp = "OPEN";
-          } else {
-            resp = "CLOSE";
-          }
-          return resp;
-        }}
-      />
-      <CardMedia
-        className={classes.media}
-        image={props.image}
-        title="Paella dish"
-      />
-      <CardContent>
-        <Typography variant="body2" color="textSecondary" component="p">
-          {props.address}
-        </Typography>
-      </CardContent>
+      <a target="_blank" href="google.com" style={aStyle}>
+        <CardHeader
+          title={props.title}
+          subheader={() => {
+            let resp = "";
+            if (props.open) {
+              resp = "OPEN";
+            } else {
+              resp = "CLOSE";
+            }
+            return resp;
+          }}
+        />
+        <CardMedia
+          className={classes.media}
+          image={props.image}
+          title="Paella dish"
+        />
+        <CardContent>
+          <Typography variant="body2" color="textSecondary" component="p">
+            {props.address}
+          </Typography>
+        </CardContent>
+      </a>
     </Card>
   );
 }
+
+const aStyle = {
+  textDecoration: "none"
+};

@@ -25,13 +25,16 @@ class App extends React.Component {
     this.setState({ address: address });
     if (key === "Enter") {
       axios
-        .get("http://localhost:8080/search", {
-          params: {
-            address: address,
-            filter: this.state.filter,
-            radius: this.state.radius
+        .get(
+          "http://localhost:8080/search" /*"https://agile-woodland-98654.herokuapp.com/search"*/,
+          {
+            params: {
+              address: address,
+              filter: this.state.filter,
+              radius: this.state.radius
+            }
           }
-        })
+        )
         .then(results => {
           this.setState({ restaurants: results.data });
           console.log(results.data);

@@ -45,6 +45,7 @@ app.get("/search", (req, res) => {
           let results = {};
           restaurants = restaurants.data.results;
           console.log(restaurants[0]);
+          let promises = [];
           for (const entry in restaurants) {
             results[entry] = {
               name: restaurants[entry].name,
@@ -54,14 +55,6 @@ app.get("/search", (req, res) => {
               user_ratings_total: restaurants[entry].user_ratings_total,
               icon: ""
             };
-          }
-          return { results, restaurants };
-        })
-        .then(contents => {
-          let results = contents.results;
-          let restaurants = contents.restaurants;
-          let promises = [];
-          for (const entry in results) {
             promises.push(
               axios.get("https://maps.googleapis.com/maps/api/place/photo?", {
                 params: {
