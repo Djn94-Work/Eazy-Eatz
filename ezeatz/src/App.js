@@ -3,13 +3,20 @@ import "./App.css";
 import Header from "./header/Header";
 import FilterPannel from "./mainpage/FilterPannel/FilterPannel";
 import CardContainer from "./mainpage/Cards/CardContainer";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 const axios = require("axios");
 
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { address: "", radius: 0, restaurants: {}, filter: "" };
+    this.state = {
+      address: "",
+      radius: 0,
+      restaurants: {},
+      filter: "",
+      selectedCard: -1
+    };
   }
 
   handleSlide = rad => {
@@ -45,15 +52,25 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <Header
-          handleSubmit={this.handleSubmit}
-          handleOnChange={this.handleOnChange}
-        ></Header>
-        <FilterPannel
-          handleSlide={this.handleSlide}
-          handleFilter={this.handleFilter}
-        />
-        <CardContainer RestaurantDetails={this.state.restaurants} />
+        <Router>
+          <Route path="/" exact={false}>
+            <Header
+              handleSubmit={this.handleSubmit}
+              handleOnChange={this.handleOnChange}
+            ></Header>
+          </Route>
+          <Route path="/" exact={true}>
+            <FilterPannel
+              handleSlide={this.handleSlide}
+              handleFilter={this.handleFilter}
+            />
+            <CardContainer
+              selectedCard={card => this.setState({ selectedCard: card })}
+              RestaurantDetails={this.state.restaurants}
+            />
+          </Route>
+          <Route path="/menu"></Route>
+        </Router>
       </div>
     );
   }

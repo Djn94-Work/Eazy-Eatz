@@ -21,8 +21,8 @@ export default function RestCard(props) {
   const classes = useStyles();
 
   return (
-    <Card className={classes.card}>
-      <a target="_blank" href="google.com" style={aStyle}>
+    <Link to="/menue" onClick={props.selectedCard} style={linkStyle}>
+      <Card className={classes.card}>
         <CardHeader
           title={props.title}
           subheader={() => {
@@ -45,11 +45,11 @@ export default function RestCard(props) {
             {props.address}
           </Typography>
         </CardContent>
-      </a>
-    </Card>
+      </Card>
+    </Link>
   );
 }
 
-const aStyle = {
-  textDecoration: "none"
+const linkStyle = {
+  textDrcoration: "none"
 };
