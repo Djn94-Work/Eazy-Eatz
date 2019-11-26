@@ -51,7 +51,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="container">
         <Router>
           <Route path="/" exact={false}>
             <Header
@@ -59,15 +59,23 @@ class App extends React.Component {
               handleOnChange={this.handleOnChange}
             ></Header>
           </Route>
+
           <Route path="/" exact={true}>
-            <FilterPannel
-              handleSlide={this.handleSlide}
-              handleFilter={this.handleFilter}
-            />
-            <CardContainer
-              selectedCard={card => this.setState({ selectedCard: card })}
-              RestaurantDetails={this.state.restaurants}
-            />
+            <div className="row">
+              <div className="col-3">
+                <FilterPannel
+                  handleSlide={this.handleSlide}
+                  handleFilter={this.handleFilter}
+                />
+              </div>
+              <div className="col-1"></div>
+              <div className="col-8">
+                <CardContainer
+                  selectedCard={card => this.setState({ selectedCard: card })}
+                  RestaurantDetails={this.state.restaurants}
+                />
+              </div>
+            </div>
           </Route>
           <Route path="/menu"></Route>
         </Router>
