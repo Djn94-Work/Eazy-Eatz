@@ -61,20 +61,15 @@ class App extends React.Component {
           </Route>
 
           <Route path="/" exact={true}>
-            <div className="row">
-              <div className="col-3">
-                <FilterPannel
-                  handleSlide={this.handleSlide}
-                  handleFilter={this.handleFilter}
-                />
-              </div>
-              <div className="col-1"></div>
-              <div className="col-8">
-                <CardContainer
-                  selectedCard={card => this.setState({ selectedCard: card })}
-                  RestaurantDetails={this.state.restaurants}
-                />
-              </div>
+            <div className="MainPage">
+              <FilterPannel
+                handleSlide={this.handleSlide}
+                handleFilter={this.handleFilter}
+              />
+              <CardContainer
+                selectedCard={card => this.setState({ selectedCard: card })}
+                RestaurantDetails={this.state.restaurants}
+              />
             </div>
           </Route>
           <Route path="/menu"></Route>

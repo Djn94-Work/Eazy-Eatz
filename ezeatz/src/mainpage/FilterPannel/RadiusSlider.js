@@ -4,7 +4,7 @@ import React from "react";
 
 function RadiusSlider(props) {
   return (
-    <div style={{ width: "300px" }}>
+    <div style={{ width: "100%" }}>
       <Typography id="continuous-slider" gutterBottom>
         Radius
       </Typography>

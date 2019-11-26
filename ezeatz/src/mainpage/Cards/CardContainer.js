@@ -17,7 +17,7 @@ function CardContainer(props) {
     );
   }
   console.log(cards);
-  return <div className="CardContainer">{cards}</div>;
+  return cards;
 }
 
 export default CardContainer;
