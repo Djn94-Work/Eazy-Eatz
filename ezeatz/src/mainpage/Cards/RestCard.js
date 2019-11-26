@@ -6,10 +6,12 @@ import CardMedia from "@material-ui/core/CardMedia";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { borders } from "@material-ui/system";
 
 const useStyles = makeStyles(() => ({
   card: {
-    maxWidth: 345
+    maxWidth: "345",
+    border: "1px solid black"
   },
   media: {
     height: 0,
@@ -41,7 +43,7 @@ export default function RestCard(props) {
           title="Paella dish"
         />
         <CardContent>
-          <Typography variant="body2" color="textSecondary" component="p">
+          <Typography variant="body2" color="black" component="p">
             {props.address}
           </Typography>
         </CardContent>
