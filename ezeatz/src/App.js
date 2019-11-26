@@ -65,6 +65,7 @@ class App extends React.Component {
               <FilterPannel
                 handleSlide={this.handleSlide}
                 handleFilter={this.handleFilter}
+                radius={this.state.radius}
               />
               <CardContainer
                 selectedCard={card => this.setState({ selectedCard: card })}

@@ -6,9 +6,8 @@ function RadiusSlider(props) {
   return (
     <div style={{ width: "100%" }}>
       <Typography id="continuous-slider" gutterBottom>
-        Radius
+        {"Radius:" + props.radius + " miles"}
       </Typography>
-      <Typography>{props.radius}</Typography>
       <Slider
         max={20}
         onChange={(event, value) => {
