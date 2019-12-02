@@ -25,12 +25,11 @@ class App extends React.Component {
 
   handleFilter = filter => {
     this.setState({ filter: filter });
-    console.log(this.state.filter);
   };
 
   handleSubmit = (key, address) => {
-    this.setState({ address: address });
     if (key === "Enter") {
+      this.setState({ address: address });
       axios
         .get(
           "http://localhost:8080/search" /*"https://agile-woodland-98654.herokuapp.com/search"*/,
@@ -44,7 +43,6 @@ class App extends React.Component {
         )
         .then(results => {
           this.setState({ restaurants: results.data });
-          console.log(results.data);
         });
     }
   };
@@ -73,7 +71,7 @@ class App extends React.Component {
               />
             </div>
           </Route>
-          <Route path="/menu"></Route>
+          <Route path="/menu">This is a menu</Route>
         </Router>
       </div>
     );

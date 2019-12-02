@@ -6,7 +6,6 @@ import CardMedia from "@material-ui/core/CardMedia";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import { borders } from "@material-ui/system";
 
 const useStyles = makeStyles(() => ({
   card: {
@@ -23,7 +22,7 @@ export default function RestCard(props) {
   const classes = useStyles();
 
   return (
-    <Link to="/menue" onClick={props.selectedCard} style={linkStyle}>
+    <Link to="/menu" onClick={props.selectedCard} style={linkStyle}>
       <Card className={classes.card}>
         <CardHeader
           title={props.title}
