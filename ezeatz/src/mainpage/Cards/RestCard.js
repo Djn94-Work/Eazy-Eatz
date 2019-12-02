@@ -5,10 +5,13 @@ import CardHeader from "@material-ui/core/CardHeader";
 import CardMedia from "@material-ui/core/CardMedia";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { borders } from "@material-ui/system";
 
 const useStyles = makeStyles(() => ({
   card: {
-    maxWidth: 345
+    maxWidth: "345",
+    border: "1px solid black"
   },
   media: {
     height: 0,
@@ -20,29 +23,35 @@ export default function RestCard(props) {
   const classes = useStyles();
 
   return (
-    <Card className={classes.card}>
-      <CardHeader
-        title={props.title}
-        subheader={() => {
-          let resp = "";
-          if (props.open) {
-            resp = "OPEN";
-          } else {
-            resp = "CLOSE";
-          }
-          return resp;
-        }}
-      />
-      <CardMedia
-        className={classes.media}
-        image={props.image}
-        title="Paella dish"
-      />
-      <CardContent>
-        <Typography variant="body2" color="textSecondary" component="p">
-          {props.address}
-        </Typography>
-      </CardContent>
-    </Card>
+    <Link to="/menue" onClick={props.selectedCard} style={linkStyle}>
+      <Card className={classes.card}>
+        <CardHeader
+          title={props.title}
+          subheader={() => {
+            let resp = "";
+            if (props.open) {
+              resp = "OPEN";
+            } else {
+              resp = "CLOSE";
+            }
+            return resp;
+          }}
+        />
+        <CardMedia
+          className={classes.media}
+          image={props.image}
+          title="Paella dish"
+        />
+        <CardContent>
+          <Typography variant="body2" color="black" component="p">
+            {props.address}
+          </Typography>
+        </CardContent>
+      </Card>
+    </Link>
   );
 }
+
+const linkStyle = {
+  textDrcoration: "none"
+};

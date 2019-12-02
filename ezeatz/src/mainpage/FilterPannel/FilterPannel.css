@@ -1,7 +1,3 @@
-.ButtonContainer {
-  width: 37vw;
-}
-
 .ButtonContainer button {
-  width: 37vw;
+  width: 100%;
 }
