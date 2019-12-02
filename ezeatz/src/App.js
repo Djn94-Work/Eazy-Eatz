@@ -1,11 +1,13 @@
 import React from "react";
 import "./App.css";
 import Header from "./header/Header";
-import FilterPannel from "./mainpage/FilterPannel/FilterPannel";
 import CardContainer from "./mainpage/Cards/CardContainer";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, useHistory } from "react-router-dom";
+import { createBrowserHistory } from "history";
 
 const axios = require("axios");
+
+const history = createBrowserHistory();
 
 class App extends React.Component {
   constructor(props) {
@@ -27,9 +29,8 @@ class App extends React.Component {
     this.setState({ filter: filter });
   };
 
-  handleSubmit = (key, address) => {
+  handleSubmit = (key, address, callback) => {
     if (key === "Enter") {
-      this.setState({ address: address });
       axios
         .get(
           "http://localhost:8080/search" /*"https://agile-woodland-98654.herokuapp.com/search"*/,
@@ -42,7 +43,11 @@ class App extends React.Component {
           }
         )
         .then(results => {
-          this.setState({ restaurants: results.data });
+          this.setState({
+            restaurants: results.data,
+            address: address
+          });
+          callback();
         });
     }
   };
@@ -53,6 +58,9 @@ class App extends React.Component {
         <Router>
           <Route path="/" exact={false}>
             <Header
+              handleSlide={this.handleSlide}
+              handleFilter={this.handleFilter}
+              radius={this.state.radius}
               handleSubmit={this.handleSubmit}
               handleOnChange={this.handleOnChange}
             ></Header>
@@ -60,18 +68,13 @@ class App extends React.Component {
 
           <Route path="/" exact={true}>
             <div className="MainPage">
-              <FilterPannel
-                handleSlide={this.handleSlide}
-                handleFilter={this.handleFilter}
-                radius={this.state.radius}
-              />
               <CardContainer
                 selectedCard={card => this.setState({ selectedCard: card })}
                 RestaurantDetails={this.state.restaurants}
               />
             </div>
           </Route>
-          <Route path="/menu">This is a menu</Route>
+          <Route path="/menu" exact={true}></Route>
         </Router>
       </div>
     );

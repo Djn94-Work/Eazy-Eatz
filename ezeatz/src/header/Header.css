@@ -1,0 +1,10 @@
+.Header {
+  background-color: slategray;
+  border-bottom: solid 2px black;
+  height: 10vh;
+}
+
+.Header #filter {
+  border: solid 2px white;
+  height: 75%;
+}
