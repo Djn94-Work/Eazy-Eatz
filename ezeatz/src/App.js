@@ -4,6 +4,7 @@ import Header from "./header/Header";
 import CardContainer from "./mainpage/Cards/CardContainer";
 import { BrowserRouter as Router, Route, useHistory } from "react-router-dom";
 import { createBrowserHistory } from "history";
+import Menu from "../src/menupage/menu";
 
 const axios = require("axios");
 
@@ -76,6 +77,9 @@ class App extends React.Component {
           </Route>
           <Route path="/menu" exact={true}></Route>
         </Router>
+        <div>
+          <Menu></Menu>
+        </div>
       </div>
     );
   }

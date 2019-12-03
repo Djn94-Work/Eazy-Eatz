@@ -7,4 +7,8 @@
 .Header #filter {
   border: solid 2px white;
   height: 75%;
+  padding-left: 10vw;
+}
+
+.searchBar {
 }

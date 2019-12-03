@@ -1,0 +1,4 @@
+.gridDiv {
+  display: grid;
+  grid-template-columns: 20vw 65vw;
+}
