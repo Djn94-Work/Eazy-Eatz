@@ -2,6 +2,7 @@ import React from "react";
 import AddressForm from "./AddressForm";
 import FilterPannel from "../mainpage/FilterPannel/FilterPannel";
 import Select from "@material-ui/core/Select";
+import InputLabel from "@material-ui/core/InputLabel";
 import "./Header.css";
 
 function Header(props) {
@@ -11,7 +12,8 @@ function Header(props) {
         handleSubmit={props.handleSubmit}
         handleOnChange={props.handleOnChange}
       ></AddressForm>
-      <Select labelId="filter-label" id="filter">
+      <InputLabel id="filter-label">Age</InputLabel>
+      <Select labelId="filter-label" id="filter" autoWidth="true">
         <FilterPannel
           handleSlide={props.handleSlide}
           handleFilter={props.handleFilter}
