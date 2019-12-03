@@ -13,7 +13,6 @@ function Header(props) {
         handleSubmit={props.handleSubmit}
         handleOnChange={props.handleOnChange}
       ></AddressForm>
-      <InputLabel id="filter-label">Food Species</InputLabel>
       <Select labelId="filter-label" id="filter">
         <FilterPannel
           handleSlide={props.handleSlide}
