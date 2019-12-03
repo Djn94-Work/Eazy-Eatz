@@ -66,20 +66,21 @@ class App extends React.Component {
               handleOnChange={this.handleOnChange}
             ></Header>
           </Route>
-
-          <Route path="/" exact={true}>
-            <div className="MainPage">
-              <CardContainer
-                selectedCard={card => this.setState({ selectedCard: card })}
-                RestaurantDetails={this.state.restaurants}
-              />
-            </div>
-          </Route>
-          <Route path="/menu" exact={true}></Route>
+          <div className="mainBody">
+            <Route path="/" exact={true}>
+              <div className="MainPage">
+                <CardContainer
+                  selectedCard={card => this.setState({ selectedCard: card })}
+                  RestaurantDetails={this.state.restaurants}
+                />
+              </div>
+            </Route>
+            <Route path="/menu" exact={true}>
+              <Menu></Menu>
+            </Route>
+          </div>
         </Router>
-        <div>
-          <Menu></Menu>
-        </div>
+        <div></div>
       </div>
     );
   }

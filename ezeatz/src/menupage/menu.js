@@ -8,20 +8,33 @@ class Menu extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      cart: []
+      cart: [],
+      subCat: ""
     };
   }
 
+  handleButton = subCat => {
+    this.setState({ subCat });
+  };
+
+  addToCart = newItem => {
+    const tempCart = [...this.state.cart];
+    tempCart.push(newItem);
+    this.setState({ cart: tempCart });
+  };
+
   render() {
     return (
-      <div className="gridDiv">
-        <div>
-          <SubCat></SubCat>
-          <CardWrap>
-            <MenuCards></MenuCards>
-          </CardWrap>
+      <div className="menu">
+        <SubCat handleButton={this.handleButton}></SubCat>
+        <div className="gridDiv">
+          <div>
+            <CardWrap cuisine="MyNameJef"></CardWrap>
+          </div>
+          <div>
+            <ShoppingCart></ShoppingCart>
+          </div>
         </div>
-        <ShoppingCart></ShoppingCart>
       </div>
     );
   }

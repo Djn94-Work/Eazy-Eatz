@@ -3,10 +3,38 @@ import Button from "@material-ui/core/Button";
 function Subcat(props) {
   return (
     <div>
-      <Button variant="contained">Appetizers</Button>
-      <Button variant="contained">Enchiladas</Button>
-      <Button variant="contained">Fajitas</Button>
-      <Button variant="contained">Desert</Button>
+      <Button
+        variant="contained"
+        onClick={() => {
+          props.handleButton("Appetizers");
+        }}
+      >
+        Appetizers
+      </Button>
+      <Button
+        variant="contained"
+        onClick={() => {
+          props.handleButton("Enchiladas");
+        }}
+      >
+        Enchiladas
+      </Button>
+      <Button
+        variant="contained"
+        onClick={() => {
+          props.handleButton("Fajitas");
+        }}
+      >
+        Fajitas
+      </Button>
+      <Button
+        variant="contained"
+        onClick={() => {
+          props.handleButton("Desert");
+        }}
+      >
+        Desert
+      </Button>
     </div>
   );
 }

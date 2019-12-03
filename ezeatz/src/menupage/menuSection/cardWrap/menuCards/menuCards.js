@@ -23,7 +23,7 @@ export default function RestCard(props) {
   const classes = useStyles();
 
   return (
-    <Card className={classes.card} width={20}>
+    <Card className={classes.card} width={20} onClick={props.onClick}>
       <CardHeader
         title="card title"
         subheader={() => {

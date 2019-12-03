@@ -77,6 +77,12 @@ app.get("/search", (req, res) => {
         });
     });
 });
+
+app.get("/menu", (req, res) => {
+  console.log(req.query.cuisine);
+  res.send({ quisine: req.query.cuisine });
+});
+
 app.listen(process.env.PORT || PORT, function() {
   console.log(`server listening on ${PORT}`);
 });
