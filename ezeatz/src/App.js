@@ -4,6 +4,11 @@ import Header from "./header/Header";
 import CardContainer from "./mainpage/Cards/CardContainer";
 import { BrowserRouter as Router, Route, useHistory } from "react-router-dom";
 import { createBrowserHistory } from "history";
+import MenuCards from "../src/menupage/menuSection/cardWrap/menuCards/menuCards";
+import Menu from "../src/menupage/menu";
+import ShoppingCart from "../src/menupage/ShoppingCart/shoppingCart";
+import SubCat from "../src/menupage/menuSection/subCat/subCat";
+import CardWrap from "../src/menupage/menuSection/cardWrap/cardWrap";
 
 const axios = require("axios");
 
@@ -76,6 +81,13 @@ class App extends React.Component {
           </Route>
           <Route path="/menu" exact={true}></Route>
         </Router>
+        <div>
+          <Menu></Menu>
+          <ShoppingCart></ShoppingCart>
+          <SubCat></SubCat>
+          <CardWrap></CardWrap>
+          <MenuCards></MenuCards>
+        </div>
       </div>
     );
   }
