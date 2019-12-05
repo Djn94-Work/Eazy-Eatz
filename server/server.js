@@ -6,13 +6,6 @@ const axios = require("axios");
 
 const PORT = 8080;
 const mysql = require("mysql");
-const connection = mysql.createConnection({
-  host: "127.0.0.1",
-  port: 3306,
-  user: "root",
-  password: "root",
-  database: "restaurant_db"
-});
 
 const express = require("express");
 const app = express();
@@ -87,17 +80,27 @@ app.get("/search", (req, res) => {
 });
 
 app.get("/menu", (req, res) => {
+  const connection = mysql.createConnection({
+    host: "127.0.0.1",
+    port: 3306,
+    user: "root",
+    // password: "root",
+    database: "restaurant_db"
+  });
+
+  let cuisine = req.query.cuisine[0].toUpperCase() + req.query.cuisine.slice(1);
+  console.log(cuisine);
   connection.connect(function(err) {
     if (err) throw err;
-    connection.query("SELECT * FROM fakemenu WHERE subCat='Pork'", function(
-      err,
-      result,
-      fields
-    ) {
-      if (err) console.error(err);
-      console.log(result);
-      res.send(result);
-    });
+    connection.query(
+      "SELECT * FROM fakemenu WHERE cuisine='" + cuisine + "'",
+      function(err, result, fields) {
+        if (err) console.error(err);
+        console.log(result);
+        res.send(result);
+      }
+    );
+    connection.end();
   });
 });
 
