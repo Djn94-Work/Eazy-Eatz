@@ -6,27 +6,6 @@ const axios = require("axios");
 
 const PORT = 8080;
 const mysql = require("mysql");
-<<<<<<< HEAD
-=======
-let connection;
-if (process.env.JAWSDB_URL) {
-  console.log("The process jawas thing is runnin");
-  connection = mysql.createConnection(process.env.JAWSDB_URL);
-} else {
-  connection = mysql.createPool({
-    connectionLimit: 10,
-    host: "localhost",
-    port: 3306,
-    user: "root",
-    password: "root",
-    database: "restaurant_db"
-  });
-}
-connection.getConnection(function(err) {
-  if (err) throw err;
-  console.log("connected as id " + connection.threadId);
-});
->>>>>>> c1bc9c2d7fe5e1a76c65d589ab161f9ca6f2672e
 
 const express = require("express");
 const app = express();
@@ -101,16 +80,22 @@ app.get("/search", (req, res) => {
 });
 
 app.get("/menu", (req, res) => {
-  const connection = mysql.createConnection({
-    host: "127.0.0.1",
-    port: 3306,
-    user: "root",
-    // password: "root",
-    database: "restaurant_db"
-  });
-
   let cuisine = req.query.cuisine[0].toUpperCase() + req.query.cuisine.slice(1);
   console.log(cuisine);
+  let connection;
+  if (process.env.JAWSDB_URL) {
+    console.log("The process jawas thing is runnin");
+    connection = mysql.createConnection(process.env.JAWSDB_URL);
+  } else {
+    connection = mysql.createConnection({
+      connectionLimit: 10,
+      host: "localhost",
+      port: 3306,
+      user: "root",
+      password: "root",
+      database: "restaurant_db"
+    });
+  }
   connection.connect(function(err) {
     if (err) throw err;
     connection.query(
