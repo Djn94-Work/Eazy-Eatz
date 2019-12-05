@@ -32,10 +32,11 @@ class Menu extends React.Component {
             <CardWrap
               cuisine={this.props.cuisine}
               restaurantName={this.props.restaurantName}
+              addToCart={this.addToCart}
             ></CardWrap>
           </div>
           <div>
-            <ShoppingCart></ShoppingCart>
+            <ShoppingCart cart={this.state.cart}></ShoppingCart>
           </div>
         </div>
       </div>
