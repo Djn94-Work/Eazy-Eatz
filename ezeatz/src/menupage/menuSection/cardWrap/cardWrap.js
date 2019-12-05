@@ -11,7 +11,6 @@ class CardWrap extends React.Component {
   }
 
   componentWillMount() {
-    window.alert(this.props.cuisine + " " + this.props.restaurantName);
     Axios.get("http://localhost:8080/menu", {
       params: { cuisine: this.props.cuisine }
     }).then(menuData => {
