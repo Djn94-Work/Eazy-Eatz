@@ -11,8 +11,7 @@ if (process.env.JAWSDB_URL) {
   console.log("The process jawas thing is runnin");
   connection = mysql.createConnection(process.env.JAWSDB_URL);
 } else {
-  connection = mysql.createPool({
-    connectionLimit: 10,
+  connection = mysql.createConnection({
     host: "localhost",
     port: 3306,
     user: "root",
@@ -20,7 +19,7 @@ if (process.env.JAWSDB_URL) {
     database: "restaurant_db"
   });
 }
-connection.getConnection(function(err) {
+connection.connect(function(err) {
   if (err) throw err;
   console.log("connected as id " + connection.threadId);
 });
@@ -98,7 +97,7 @@ app.get("/search", (req, res) => {
 });
 
 app.get("/menu", (req, res) => {
-  connection.getConnection(function(err) {
+  connection.connect(function(err) {
     connection.query("SELECT * FROM fakemenu", function(err, result, fields) {
       if (err) console.error(err);
       console.log(result);
