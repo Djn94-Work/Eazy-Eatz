@@ -105,7 +105,6 @@ app.get("/menu", (req, res) => {
       if (err) throw err;
 
       res.send(result);
-      connection.end();
     });
   });
 });
