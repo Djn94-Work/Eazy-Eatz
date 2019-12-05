@@ -6,23 +6,6 @@ const axios = require("axios");
 
 const PORT = 8080;
 const mysql = require("mysql");
-let connection;
-if (process.env.JAWSDB_URL) {
-  console.log("The process jawas thing is runnin");
-  connection = mysql.createConnection(process.env.JAWSDB_URL);
-} else {
-  connection = mysql.createConnection({
-    host: "localhost",
-    port: 3306,
-    user: "root",
-    password: "root",
-    database: "restaurant_db"
-  });
-}
-connection.connect(function(err) {
-  if (err) throw err;
-  console.log("connected as id " + connection.threadId);
-});
 
 const express = require("express");
 const app = express();
@@ -97,14 +80,33 @@ app.get("/search", (req, res) => {
 });
 
 app.get("/menu", (req, res) => {
-  connection.connect(function(err) {
-    connection.query("SELECT * FROM fakemenu", function(err, result, fields) {
-      if (err) console.error(err);
-      console.log(result);
-      if (err) throw err;
-
-      res.send(result);
+  let cuisine = req.query.cuisine[0].toUpperCase() + req.query.cuisine.slice(1);
+  console.log(cuisine);
+  let connection;
+  if (process.env.JAWSDB_URL) {
+    console.log("The process jawas thing is runnin");
+    connection = mysql.createConnection(process.env.JAWSDB_URL);
+  } else {
+    connection = mysql.createConnection({
+      connectionLimit: 10,
+      host: "localhost",
+      port: 3306,
+      user: "root",
+      password: "root",
+      database: "restaurant_db"
     });
+  }
+  connection.connect(function(err) {
+    if (err) throw err;
+    connection.query(
+      "SELECT * FROM fakemenu WHERE cuisine='" + cuisine + "'",
+      function(err, result, fields) {
+        if (err) console.error(err);
+        console.log(result);
+        res.send(result);
+      }
+    );
+    connection.end();
   });
 });
 
