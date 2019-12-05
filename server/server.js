@@ -6,12 +6,23 @@ const axios = require("axios");
 
 const PORT = 8080;
 const mysql = require("mysql");
-const connection = mysql.createConnection({
-  host: "127.0.0.1",
-  port: 3306,
-  user: "root",
-  password: "root",
-  database: "restaurant_db"
+let connection;
+if (process.env.JAWSDB_URL) {
+  console.log("The process jawas thing is runnin");
+  connection = mysql.createConnection(process.env.JAWSDB_URL);
+} else {
+  connection = mysql.createPool({
+    connectionLimit: 10,
+    host: "localhost",
+    port: 3306,
+    user: "root",
+    password: "root",
+    database: "restaurant_db"
+  });
+}
+connection.getConnection(function(err) {
+  if (err) throw err;
+  console.log("connected as id " + connection.threadId);
 });
 
 const express = require("express");
@@ -87,16 +98,14 @@ app.get("/search", (req, res) => {
 });
 
 app.get("/menu", (req, res) => {
-  connection.connect(function(err) {
-    if (err) throw err;
-    connection.query("SELECT * FROM fakemenu WHERE subCat='Pork'", function(
-      err,
-      result,
-      fields
-    ) {
+  connection.getConnection(function(err) {
+    connection.query("SELECT * FROM fakemenu", function(err, result, fields) {
       if (err) console.error(err);
       console.log(result);
+      if (err) throw err;
+
       res.send(result);
+      connection.end();
     });
   });
 });
