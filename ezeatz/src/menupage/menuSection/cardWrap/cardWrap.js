@@ -11,11 +11,11 @@ class CardWrap extends React.Component {
   }
 
   componentWillMount() {
-    console.log("test");
+    window.alert(this.props.cuisine + " " + this.props.restaurantName);
     Axios.get("http://localhost:8080/menu", {
       params: { cuisine: this.props.cuisine }
     }).then(menuData => {
-      this.setState({ menuData });
+      this.setState({ menuData: menuData.data });
     });
   }
 

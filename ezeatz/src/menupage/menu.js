@@ -29,7 +29,10 @@ class Menu extends React.Component {
         <SubCat handleButton={this.handleButton}></SubCat>
         <div className="gridDiv">
           <div>
-            <CardWrap cuisine="MyNameJef"></CardWrap>
+            <CardWrap
+              cuisine={this.props.cuisine}
+              restaurantName={this.props.restaurantName}
+            ></CardWrap>
           </div>
           <div>
             <ShoppingCart></ShoppingCart>

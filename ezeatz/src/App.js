@@ -22,6 +22,18 @@ class App extends React.Component {
     };
   }
 
+  getSelectedCard = () => {
+    const index = this.state.selectedCard;
+    return this.state.restaurants[index];
+
+    if (index > -1 && index < (index in this.state.restaurants)) {
+      return this.state.restaurants[index];
+    } else {
+      console.error("The Card with index '" + index + "' dosent exist");
+      return {};
+    }
+  };
+
   handleSlide = rad => {
     this.setState({ radius: rad });
   };
@@ -76,7 +88,10 @@ class App extends React.Component {
               </div>
             </Route>
             <Route path="/menu" exact={true}>
-              <Menu></Menu>
+              <Menu
+                restaurantName={this.getSelectedCard()}
+                cuisine={this.state.filter}
+              ></Menu>
             </Route>
           </div>
         </Router>
