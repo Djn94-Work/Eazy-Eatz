@@ -89,11 +89,11 @@ app.get("/menu", (req, res) => {
   } else {
     connection = mysql.createConnection({
       connectionLimit: 10,
-      host: "localhost",
+      host: "remotemysql.com",
       port: 3306,
-      user: "root",
-      password: "root",
-      database: "restaurant_db"
+      user: "FvOErvgsR2",
+      password: "Uijsh9oEQc",
+      database: "FvOErvgsR2"
     });
   }
   connection.connect(function(err) {
