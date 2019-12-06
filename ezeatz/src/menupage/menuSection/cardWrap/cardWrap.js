@@ -25,16 +25,18 @@ class CardWrap extends React.Component {
     });
   }
 
-  cardBuilder = () => {};
+  cardBuilder = () => {
+    const cards = [];
+    for (const card in menuData.data) {
+      cards.push(
+        <MenuCard onClick={() => console.log("onclick works")}></MenuCard>
+      );
+    }
+    return cards;
+  };
 
   render() {
-    return (
-      <div className="shortCard">
-        <MenuCard onClick={() => console.log("onclick works")}></MenuCard>
-        <MenuCard onClick={() => console.log("onclick works")}></MenuCard>
-        <MenuCard onClick={() => console.log("onclick works")}></MenuCard>
-      </div>
-    );
+    return <div className="shortCard">{this.cardBuilder()}</div>;
   }
 }
 
