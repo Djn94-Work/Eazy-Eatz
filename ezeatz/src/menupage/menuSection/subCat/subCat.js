@@ -9,7 +9,7 @@ function Subcat(props) {
           props.handleButton("Appetizers");
         }}
       >
-        Appetizers
+        {props.subCatArray[0]}
       </Button>
       <Button
         variant="contained"
@@ -17,7 +17,7 @@ function Subcat(props) {
           props.handleButton("Enchiladas");
         }}
       >
-        Enchiladas
+        {props.subCatArray[1]}
       </Button>
       <Button
         variant="contained"
@@ -25,7 +25,7 @@ function Subcat(props) {
           props.handleButton("Fajitas");
         }}
       >
-        Fajitas
+        {props.subCatArray[2]}
       </Button>
       <Button
         variant="contained"
@@ -33,7 +33,7 @@ function Subcat(props) {
           props.handleButton("Desert");
         }}
       >
-        Desert
+        {props.subCatArray[3]}
       </Button>
     </div>
   );

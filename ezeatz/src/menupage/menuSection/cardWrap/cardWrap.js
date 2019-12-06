@@ -6,8 +6,7 @@ class CardWrap extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      menuData: {},
-      subCats: []
+      menuData: {}
     };
   }
 
@@ -20,10 +19,9 @@ class CardWrap extends React.Component {
         if (!subCats.includes(menuData.data[item].subCat)) {
           subCats.push(menuData.data[item].subCat);
         }
-        console.log(menuData.data[item].subCat);
       }
-      this.setState({ menuData: menuData.data, subCats: subCats });
-      console.log(this.state.subCats);
+      this.props.setSubCatArray(subCats);
+      this.setState({ menuData: menuData.data });
     });
   }
 
