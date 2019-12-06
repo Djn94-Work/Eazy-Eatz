@@ -27,6 +27,8 @@ class CardWrap extends React.Component {
     });
   }
 
+  cardBuilder = () => {};
+
   render() {
     return (
       <div className="shortCard">
