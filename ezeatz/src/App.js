@@ -22,12 +22,11 @@ class App extends React.Component {
     };
   }
 
-  getSelectedCard = () => {
+  getSelectedCardName = () => {
     const index = this.state.selectedCard;
-    return this.state.restaurants[index];
 
-    if (index > -1 && index < (index in this.state.restaurants)) {
-      return this.state.restaurants[index];
+    if (index > -1 && index !== {}) {
+      return this.state.restaurants[index].name;
     } else {
       console.error("The Card with index '" + index + "' dosent exist");
       return {};
@@ -89,7 +88,7 @@ class App extends React.Component {
             </Route>
             <Route path="/menu" exact={true}>
               <Menu
-                restaurantName={this.getSelectedCard()}
+                restaurantName={this.getSelectedCardName()}
                 cuisine={this.state.filter}
               ></Menu>
             </Route>

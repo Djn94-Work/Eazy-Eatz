@@ -6,7 +6,8 @@ class CardWrap extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      menuData: {}
+      menuData: {},
+      subCats: []
     };
   }
 
@@ -14,7 +15,15 @@ class CardWrap extends React.Component {
     Axios.get("http://localhost:8080/menu", {
       params: { cuisine: this.props.cuisine }
     }).then(menuData => {
-      this.setState({ menuData: menuData.data });
+      const subCats = [];
+      for (const item in menuData.data) {
+        if (!subCats.includes(menuData.data[item].subCat)) {
+          subCats.push(menuData.data[item].subCat);
+        }
+        console.log(menuData.data[item].subCat);
+      }
+      this.setState({ menuData: menuData.data, subCats: subCats });
+      console.log(this.state.subCats);
     });
   }
 

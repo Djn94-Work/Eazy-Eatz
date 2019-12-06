@@ -51,7 +51,6 @@ app.get("/search", (req, res) => {
             results[entry] = {
               name: restaurants[entry].name,
               address: restaurants[entry].vicinity,
-              open: restaurants[entry].opening_hours.open_now,
               rating: restaurants[entry].rating,
               user_ratings_total: restaurants[entry].user_ratings_total,
               icon: ""
