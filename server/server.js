@@ -92,7 +92,7 @@ app.get("/menu", (req, res) => {
       host: "remotemysql.com",
       port: 3306,
       user: "FvOErvgsR2",
-      password: "Uijsh9oEQc",
+      password: process.env.DB_PASSWORD,
       database: "FvOErvgsR2"
     });
   }
