@@ -1,7 +1,9 @@
 .shoppingDiv {
   border: solid black 2px;
   height: 45vh;
-
+  width: 20vw;
   grid-row-start: 3;
   grid-row-end: 3;
+  overflow-y: scroll;
+  position: fixed;
 }

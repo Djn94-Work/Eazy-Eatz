@@ -10,7 +10,7 @@ class CardWrap extends React.Component {
     };
   }
 
-  componentWillMount() {
+  componentDidMount() {
     Axios.get("http://localhost:8080/menu", {
       params: { cuisine: this.props.cuisine }
     }).then(menuData => {
@@ -26,6 +26,7 @@ class CardWrap extends React.Component {
   }
 
   cardBuilder = () => {
+<<<<<<< HEAD
     const cards = [];
     for (const card in menuData.data) {
       cards.push(
@@ -35,6 +36,23 @@ class CardWrap extends React.Component {
     return cards;
   };
 
+=======
+    const cardArray = [];
+    console.log(this.state.menuData);
+    for (const item in this.state.menuData) {
+      //  if (this.props.subCat === this.state.menuData[item]) {
+      cardArray.push(
+        <MenuCard
+          menuItem={this.state.menuData[item].menuItem}
+          price={this.state.menuData[item].price}
+          description={this.state.menuData[item].description}
+        ></MenuCard>
+      );
+      //  }
+    }
+    return cardArray;
+  };
+>>>>>>> 8091ff0c16e9e27aa28ed57194996a77ceb6deed
   render() {
     return <div className="shortCard">{this.cardBuilder()}</div>;
   }
