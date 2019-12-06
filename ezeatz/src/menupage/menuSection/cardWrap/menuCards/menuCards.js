@@ -7,25 +7,13 @@ import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import { sizing } from "@material-ui/system";
 
-const useStyles = makeStyles(() => ({
-  card: {
-    // maxWidth: "200",
-    minWidth: "500",
-    border: "1px solid black"
-  },
-  media: {
-    height: 0,
-    paddingTop: "56.25%" // 16:9
-  }
-}));
-
-export default function RestCard(props) {
-  const classes = useStyles();
-
+export default function menuCard(props) {
+  console.log("MENU CARD PROPS" );
+  console.log(props);
   return (
-    <Card className={classes.card} width={20} onClick={props.onClick}>
+    <Card className="card" width={20} onClick={props.onClick}>
       <CardHeader
-        title="card title"
+        title={props.menuItem}
         subheader={() => {
           let resp = "";
           if (props.open) {
@@ -36,14 +24,11 @@ export default function RestCard(props) {
           return resp;
         }}
       />
-      <CardMedia
-        // className={classes.media}
-        // image={props.image}
-        title="Paella dish"
-      />
+      <CardMedia title="Paella dish" />
       <CardContent>
         <Typography variant="body2" color="black" component="p">
-          <div>SAMPLE CARD AAAAYYYEEEEE</div>
+          <div>{props.price}</div>
+          <div>{props.description}</div>
         </Typography>
       </CardContent>
     </Card>

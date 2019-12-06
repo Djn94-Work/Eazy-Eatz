@@ -39,6 +39,7 @@ class Menu extends React.Component {
           <div>
             <CardWrap
               setSubCatArray={this.setSubCatArray}
+              subCat={this.state.subCat}
               cuisine={this.props.cuisine}
               restaurantName={this.props.restaurantName}
               addToCart={this.addToCart}

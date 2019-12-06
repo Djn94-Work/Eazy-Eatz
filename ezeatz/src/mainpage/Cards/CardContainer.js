@@ -19,7 +19,6 @@ function CardContainer(props) {
       />
     );
   }
-  console.log(cards);
   return cards;
 }
 
