@@ -9,7 +9,8 @@ class Menu extends React.Component {
     super(props);
     this.state = {
       cart: [],
-      subCat: ""
+      subCat: "",
+      subCatArray: []
     };
   }
 
@@ -23,13 +24,21 @@ class Menu extends React.Component {
     this.setState({ cart: tempCart });
   };
 
+  setSubCatArray = subCatArray => {
+    this.setState({ subCatArray: subCatArray });
+  };
+
   render() {
     return (
       <div className="menu">
-        <SubCat handleButton={this.handleButton}></SubCat>
+        <SubCat
+          subCatArray={this.state.subCatArray}
+          handleButton={this.handleButton}
+        ></SubCat>
         <div className="gridDiv">
           <div>
             <CardWrap
+              setSubCatArray={this.setSubCatArray}
               cuisine={this.props.cuisine}
               restaurantName={this.props.restaurantName}
               addToCart={this.addToCart}
