@@ -29,15 +29,15 @@ class CardWrap extends React.Component {
     const cardArray = [];
     console.log(this.state.menuData);
     for (const item in this.state.menuData) {
-      //  if (this.props.subCat === this.state.menuData[item]) {
-      cardArray.push(
-        <MenuCard
-          menuItem={this.state.menuData[item].menuItem}
-          price={this.state.menuData[item].price}
-          description={this.state.menuData[item].description}
-        ></MenuCard>
-      );
-      //  }
+      if (this.props.subCat === this.state.menuData[item].subCat) {
+        cardArray.push(
+          <MenuCard
+            menuItem={this.state.menuData[item].menuItem}
+            price={this.state.menuData[item].price}
+            description={this.state.menuData[item].description}
+          ></MenuCard>
+        );
+      }
     }
     return cardArray;
   };

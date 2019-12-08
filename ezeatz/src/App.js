@@ -2,13 +2,10 @@ import React from "react";
 import "./App.css";
 import Header from "./header/Header";
 import CardContainer from "./mainpage/Cards/CardContainer";
-import { BrowserRouter as Router, Route, useHistory } from "react-router-dom";
-import { createBrowserHistory } from "history";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import Menu from "../src/menupage/menu";
 
 const axios = require("axios");
-
-const history = createBrowserHistory();
 
 class App extends React.Component {
   constructor(props) {
@@ -27,6 +24,8 @@ class App extends React.Component {
 
     if (index > -1 && index !== {}) {
       return this.state.restaurants[index].name;
+    } else if (index === -1) {
+      return {};
     } else {
       console.error("The Card with index '" + index + "' dosent exist");
       return {};

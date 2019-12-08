@@ -1,5 +1,4 @@
 import React from "react";
-import MenuCards from "./menuSection/cardWrap/menuCards/menuCards";
 import ShoppingCart from "./ShoppingCart/shoppingCart";
 import SubCat from "./menuSection/subCat/subCat";
 import CardWrap from "./menuSection/cardWrap/cardWrap";
@@ -39,7 +38,7 @@ class Menu extends React.Component {
           <div>
             <CardWrap
               setSubCatArray={this.setSubCatArray}
-              subCat={this.state.subCat}
+              subCat={this.state.subCat || this.state.subCatArray[0]}
               cuisine={this.props.cuisine}
               restaurantName={this.props.restaurantName}
               addToCart={this.addToCart}
