@@ -17,7 +17,6 @@ app.use(express.json());
 let key = process.env.GMAPS_KEY;
 
 app.get("/search", (req, res) => {
-  // console.log(req.query.address);
   axios
     .get(`https://maps.googleapis.com/maps/api/geocode/json?`, {
       params: {
@@ -27,7 +26,6 @@ app.get("/search", (req, res) => {
     })
     .then(locations => {
       const { lat, lng } = locations.data.results[0].geometry.location;
-      console.log("lat: " + lat + " lng: " + lng);
       axios
         .get("https://maps.googleapis.com/maps/api/place/nearbysearch/json?", {
           params: {
@@ -41,7 +39,6 @@ app.get("/search", (req, res) => {
           this.image = {};
           let results = [];
           restaurants = restaurants.data.results;
-          console.log(restaurants[0].types);
           let promises = [];
           for (const entry in restaurants) {
             if (
@@ -85,7 +82,6 @@ app.get("/menu", (req, res) => {
   console.log(cuisine);
   let connection;
   if (process.env.JAWSDB_URL) {
-    console.log("The process jawas thing is runnin");
     connection = mysql.createConnection(process.env.JAWSDB_URL);
   } else {
     connection = mysql.createConnection({

@@ -1,6 +1,7 @@
 import Slider from "@material-ui/core/Slider";
 import Typography from "@material-ui/core/Typography";
 import React from "react";
+import { getThemeProps } from "@material-ui/styles";
 
 function RadiusSlider(props) {
   return (
@@ -14,6 +15,7 @@ function RadiusSlider(props) {
           props.handleSlide(value);
         }}
         aria-labelledby="continuous-slider"
+        value={props.radius}
       />
     </div>
   );
