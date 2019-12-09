@@ -26,15 +26,15 @@ export default function RestCard(props) {
       <Card className={classes.card}>
         <CardHeader
           title={props.title}
-          subheader={() => {
+          subheader={(() => {
             let resp = "";
             if (props.open) {
               resp = "OPEN";
             } else {
-              resp = "CLOSE";
+              resp = "CLOSED";
             }
             return resp;
-          }}
+          })()}
         />
         <CardMedia
           className={classes.media}

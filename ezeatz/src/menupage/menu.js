@@ -3,7 +3,7 @@ import ShoppingCart from "./ShoppingCart/shoppingCart";
 import SubCat from "./menuSection/subCat/subCat";
 import CardWrap from "./menuSection/cardWrap/cardWrap";
 import "./menu.css";
-class Menu extends React.Component {
+class MenuPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -11,6 +11,10 @@ class Menu extends React.Component {
       subCat: "",
       subCatArray: []
     };
+  }
+
+  componentDidMount() {
+    this.props.menuDidMount();
   }
 
   handleButton = subCat => {
@@ -52,4 +56,4 @@ class Menu extends React.Component {
     );
   }
 }
-export default Menu;
+export default MenuPage;

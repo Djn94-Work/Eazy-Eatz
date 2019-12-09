@@ -11,7 +11,6 @@ function Header(props) {
       <AddressForm
         className="searchBar"
         handleSubmit={props.handleSubmit}
-        handleOnChange={props.handleOnChange}
       ></AddressForm>
       <Select labelId="filter-label" id="filter" autoWidth={true}>
         <FilterPannel

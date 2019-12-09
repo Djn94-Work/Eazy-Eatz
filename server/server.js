@@ -17,6 +17,7 @@ app.use(express.json());
 let key = process.env.GMAPS_KEY;
 
 app.get("/search", (req, res) => {
+  // console.log(req.query.address);
   axios
     .get(`https://maps.googleapis.com/maps/api/geocode/json?`, {
       params: {
@@ -26,6 +27,7 @@ app.get("/search", (req, res) => {
     })
     .then(locations => {
       const { lat, lng } = locations.data.results[0].geometry.location;
+      console.log("lat: " + lat + " lng: " + lng);
       axios
         .get("https://maps.googleapis.com/maps/api/place/nearbysearch/json?", {
           params: {
@@ -50,6 +52,7 @@ app.get("/search", (req, res) => {
                 address: restaurants[entry].vicinity,
                 rating: restaurants[entry].rating,
                 user_ratings_total: restaurants[entry].user_ratings_total,
+                open: restaurants[entry].open,
                 icon: ""
               });
               promises.push(
@@ -71,6 +74,7 @@ app.get("/search", (req, res) => {
                   images[i].request._redirectable._options.href;
               }
               res.send(results);
+              console.log("Restaurants Sent");
             })
             .catch(e => console.log(e));
         });

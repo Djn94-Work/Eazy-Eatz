@@ -2,7 +2,6 @@ import React from "react";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
 import CardContent from "@material-ui/core/CardContent";
-import Typography from "@material-ui/core/Typography";
 
 export default function MenuCard(props) {
   console.log("MENU CARD PROPS");
@@ -22,10 +21,8 @@ export default function MenuCard(props) {
         }}
       />
       <CardContent>
-        <Typography variant="body2" color="black" component="p">
-          <div>{props.price}</div>
-          <div>{props.description}</div>
-        </Typography>
+        <div>{props.price}</div>
+        <div>{props.description}</div>
       </CardContent>
     </Card>
   );
