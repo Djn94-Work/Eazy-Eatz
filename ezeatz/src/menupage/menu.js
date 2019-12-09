@@ -45,7 +45,7 @@ class MenuPage extends React.Component {
               subCat={this.state.subCat || this.state.subCatArray[0]}
               cuisine={this.props.cuisine}
               restaurantName={this.props.restaurantName}
-              addToCart={this.addToCart}
+              onClick={this.addToCart}
             ></CardWrap>
           </div>
           <div>
