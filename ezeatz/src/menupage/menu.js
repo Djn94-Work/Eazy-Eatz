@@ -23,7 +23,7 @@ class MenuPage extends React.Component {
 
   addToCart = newItem => {
     const tempCart = [...this.state.cart];
-    tempCart.push(newItem);
+    tempCart.push(<div onClick={this.removeFromCart}>{newItem}</div>);
     this.setState({ cart: tempCart });
   };
 
@@ -55,10 +55,7 @@ class MenuPage extends React.Component {
             ></CardWrap>
           </div>
           <div>
-            <ShoppingCart
-              cart={this.state.cart}
-              onClick={this.removeFromCart}
-            ></ShoppingCart>
+            <ShoppingCart cart={this.state.cart}></ShoppingCart>
           </div>
         </div>
       </div>
