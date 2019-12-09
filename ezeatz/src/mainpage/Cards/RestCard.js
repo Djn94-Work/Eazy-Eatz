@@ -21,34 +21,45 @@ const useStyles = makeStyles(() => ({
 export default function RestCard(props) {
   const classes = useStyles();
 
-  return (
-    <Link to="/menu" onClick={props.selectedCard} style={linkStyle}>
-      <Card className={classes.card}>
-        <CardHeader
-          title={props.title}
-          subheader={(() => {
-            let resp = "";
-            if (props.open) {
-              resp = "OPEN";
-            } else {
-              resp = "CLOSED";
-            }
-            return resp;
-          })()}
-        />
-        <CardMedia
-          className={classes.media}
-          image={props.image}
-          title="Paella dish"
-        />
-        <CardContent>
-          <Typography variant="body2" color="black" component="p">
-            {props.address}
-          </Typography>
-        </CardContent>
-      </Card>
-    </Link>
+  const card = (
+    <Card className={classes.card}>
+      <CardHeader
+        title={props.title}
+        subheader={(() => {
+          let resp = "";
+          if (props.open) {
+            resp = "OPEN";
+          } else {
+            resp = "CLOSED";
+          }
+          return resp;
+        })()}
+      />
+      <CardMedia
+        className={classes.media}
+        image={props.image}
+        title="Paella dish"
+      />
+      <CardContent>
+        <Typography variant="body2" color="black" component="p">
+          {props.address}
+        </Typography>
+      </CardContent>
+    </Card>
   );
+
+  let result;
+
+  if (props.open) {
+    result = (
+      <Link to="/menu" onClick={props.selectedCard} style={linkStyle}>
+        {card}
+      </Link>
+    );
+  } else {
+    result = card;
+  }
+  return result;
 }
 
 const linkStyle = {
