@@ -26,33 +26,23 @@ class CardWrap extends React.Component {
   }
 
   cardBuilder = () => {
-<<<<<<< HEAD
-    const cards = [];
-    for (const card in menuData.data) {
-      cards.push(
-        <MenuCard onClick={() => console.log("onclick works")}></MenuCard>
-      );
-    }
-    return cards;
-  };
-
-=======
     const cardArray = [];
     console.log(this.state.menuData);
     for (const item in this.state.menuData) {
       //  if (this.props.subCat === this.state.menuData[item]) {
-      cardArray.push(
+      let card = (
         <MenuCard
           menuItem={this.state.menuData[item].menuItem}
           price={this.state.menuData[item].price}
           description={this.state.menuData[item].description}
+          addToCart={this.props.addToCart}
         ></MenuCard>
       );
+      cardArray.push(card);
       //  }
     }
     return cardArray;
   };
->>>>>>> 8091ff0c16e9e27aa28ed57194996a77ceb6deed
   render() {
     return <div className="shortCard">{this.cardBuilder()}</div>;
   }
