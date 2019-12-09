@@ -4,6 +4,9 @@ import FilterPannel from "./FilterPannel/FilterPannel";
 import Select from "@material-ui/core/Select";
 import NameTag from "./NameTag";
 import "./Header.css";
+import { FaUserCircle } from "react-icons/fa";
+import { IconContext } from "react-icons";
+
 //import { InputLabel, TextField } from "@material-ui/core";
 
 function Header(props) {
@@ -23,6 +26,17 @@ function Header(props) {
         </Select>
       </div>
       <NameTag />
+      <IconContext.Provider
+        value={{
+          color: "black",
+          className: "global-class-name",
+          size: "3em"
+        }}
+      >
+        <div>
+          <FaUserCircle className="userIcon" />
+        </div>
+      </IconContext.Provider>
     </div>
   );
 }
