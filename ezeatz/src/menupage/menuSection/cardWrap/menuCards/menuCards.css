@@ -2,6 +2,10 @@
   border: 1px solid black;
   max-width: 200;
   min-width: 500;
+  cursor: pointer;
+}
+.cardHover :hover{
+  background-color: gray
 }
 .media {
   height: 0;

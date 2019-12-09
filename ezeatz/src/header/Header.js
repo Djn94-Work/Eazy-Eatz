@@ -1,9 +1,9 @@
 import React from "react";
 import AddressForm from "./AddressForm";
-import FilterPannel from "../mainpage/FilterPannel/FilterPannel";
+import FilterPannel from "./FilterPannel/FilterPannel";
 import Select from "@material-ui/core/Select";
 import "./Header.css";
-import { InputLabel, TextField } from "@material-ui/core";
+//import { InputLabel, TextField } from "@material-ui/core";
 
 function Header(props) {
   return (
@@ -11,9 +11,8 @@ function Header(props) {
       <AddressForm
         className="searchBar"
         handleSubmit={props.handleSubmit}
-        handleOnChange={props.handleOnChange}
       ></AddressForm>
-      <Select labelId="filter-label" id="filter" autoWidth="true">
+      <Select labelId="filter-label" id="filter" autoWidth={true}>
         <FilterPannel
           handleSlide={props.handleSlide}
           handleFilter={props.handleFilter}

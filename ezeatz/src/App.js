@@ -1,14 +1,11 @@
 import React from "react";
 import "./App.css";
 import Header from "./header/Header";
-import CardContainer from "./mainpage/Cards/CardContainer";
-import { BrowserRouter as Router, Route, useHistory } from "react-router-dom";
-import { createBrowserHistory } from "history";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import Menu from "../src/menupage/menu";
+import MainPage from "./mainpage/mainPage";
 
 const axios = require("axios");
-
-const history = createBrowserHistory();
 
 class App extends React.Component {
   constructor(props) {
@@ -27,6 +24,8 @@ class App extends React.Component {
 
     if (index > -1 && index !== {}) {
       return this.state.restaurants[index].name;
+    } else if (index === -1) {
+      return {};
     } else {
       console.error("The Card with index '" + index + "' dosent exist");
       return {};
@@ -64,6 +63,14 @@ class App extends React.Component {
     }
   };
 
+  menuDidMount = () => {
+    this.setState({
+      radius: 0,
+      filter: "",
+      selectedCard: -1
+    });
+  };
+
   render() {
     return (
       <div className="container">
@@ -74,23 +81,22 @@ class App extends React.Component {
               handleFilter={this.handleFilter}
               radius={this.state.radius}
               handleSubmit={this.handleSubmit}
-              handleOnChange={this.handleOnChange}
             ></Header>
           </Route>
           <div className="mainBody">
-            <Route path="/" exact={true}>
-              <div className="MainPage">
-                <CardContainer
-                  selectedCard={card => this.setState({ selectedCard: card })}
-                  RestaurantDetails={this.state.restaurants}
-                />
-              </div>
+            <Route path="/" exact={true} onChange={this.onRouteChange}>
+              <MainPage
+                selectedCard={card => this.setState({ selectedCard: card })}
+                RestaurantDetails={this.state.restaurants}
+              />
             </Route>
-            <Route path="/menu" exact={true}>
+            <Route path="/menu" exact={true} onChange={this.onRouteChange}>
               <Menu
+                menuDidMount={this.menuDidMount}
                 restaurantName={this.getSelectedCardName()}
                 cuisine={this.state.filter}
-              ></Menu>
+                onRouteChange={this.onRouteChange}
+              />
             </Route>
           </div>
         </Router>

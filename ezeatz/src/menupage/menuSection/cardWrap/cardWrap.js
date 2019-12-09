@@ -28,18 +28,20 @@ class CardWrap extends React.Component {
   cardBuilder = () => {
     const cardArray = [];
     console.log(this.state.menuData);
+    let key = 0;
     for (const item in this.state.menuData) {
-      //  if (this.props.subCat === this.state.menuData[item]) {
-      let card = (
-        <MenuCard
-          menuItem={this.state.menuData[item].menuItem}
-          price={this.state.menuData[item].price}
-          description={this.state.menuData[item].description}
-          addToCart={this.props.addToCart}
-        ></MenuCard>
-      );
-      cardArray.push(card);
-      //  }
+      if (this.props.subCat === this.state.menuData[item].subCat) {
+        cardArray.push(
+          <MenuCard
+            onClick={this.props.onClick}
+            key={key}
+            menuItem={this.state.menuData[item].menuItem}
+            price={this.state.menuData[item].price}
+            description={this.state.menuData[item].description}
+          ></MenuCard>
+        );
+        key++;
+      }
     }
     return cardArray;
   };

@@ -1,10 +1,9 @@
 import React from "react";
-import MenuCards from "./menuSection/cardWrap/menuCards/menuCards";
 import ShoppingCart from "./ShoppingCart/shoppingCart";
 import SubCat from "./menuSection/subCat/subCat";
 import CardWrap from "./menuSection/cardWrap/cardWrap";
 import "./menu.css";
-class Menu extends React.Component {
+class MenuPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -14,6 +13,10 @@ class Menu extends React.Component {
     };
   }
 
+  componentDidMount() {
+    this.props.menuDidMount();
+  }
+
   handleButton = subCat => {
     this.setState({ subCat });
   };
@@ -21,6 +24,12 @@ class Menu extends React.Component {
   addToCart = newItem => {
     const tempCart = [...this.state.cart];
     tempCart.push(newItem);
+    this.setState({ cart: tempCart });
+  };
+
+  removeFromCart = index => {
+    const tempCart = [...this.state.cart];
+    tempCart.splice(index, 1);
     this.setState({ cart: tempCart });
   };
 
@@ -39,18 +48,21 @@ class Menu extends React.Component {
           <div>
             <CardWrap
               setSubCatArray={this.setSubCatArray}
-              subCat={this.state.subCat}
+              subCat={this.state.subCat || this.state.subCatArray[0]}
               cuisine={this.props.cuisine}
               restaurantName={this.props.restaurantName}
-              addToCart={this.addToCart}
+              onClick={this.addToCart}
             ></CardWrap>
           </div>
           <div>
-            <ShoppingCart cart={this.state.cart}></ShoppingCart>
+            <ShoppingCart
+              cart={this.state.cart}
+              onClick={this.removeFromCart}
+            ></ShoppingCart>
           </div>
         </div>
       </div>
     );
   }
 }
-export default Menu;
+export default MenuPage;

@@ -10,12 +10,14 @@ function CardContainer(props) {
   for (const search in props.RestaurantDetails) {
     cards.push(
       <RestCard
+        key={search}
         style={style}
         selectedCard={() => props.selectedCard(search)}
         title={props.RestaurantDetails[search].name}
         open={props.RestaurantDetails[search].open}
         image={props.RestaurantDetails[search].icon}
         address={props.RestaurantDetails[search].address}
+        open={props.RestaurantDetails[search].open}
       />
     );
   }
