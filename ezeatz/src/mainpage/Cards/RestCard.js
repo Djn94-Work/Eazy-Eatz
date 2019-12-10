@@ -50,15 +50,15 @@ export default function RestCard(props) {
 
   let result;
 
-  // if (props.open) {
-  result = (
-    <Link to="/menu" onClick={props.selectedCard} style={linkStyle}>
-      {card}
-    </Link>
-  );
-  // } else {
-  //   result = card;
-  // }
+  if (props.open) {
+    result = (
+      <Link to="/menu" onClick={props.selectedCard} style={linkStyle}>
+        {card}
+      </Link>
+    );
+  } else {
+    result = card;
+  }
   return result;
 }
 

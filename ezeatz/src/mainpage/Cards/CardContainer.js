@@ -17,7 +17,6 @@ function CardContainer(props) {
         open={props.RestaurantDetails[search].open}
         image={props.RestaurantDetails[search].icon}
         address={props.RestaurantDetails[search].address}
-        open={props.RestaurantDetails[search].open}
       />
     );
   }
