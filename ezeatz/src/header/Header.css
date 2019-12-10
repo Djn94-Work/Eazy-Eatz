@@ -19,4 +19,10 @@
 .userIcon {
   margin-left: 92vw;
   margin-top: -15vh;
+  z-index: -1;
+}
+
+.global-class-name userIcon {
+  z-index: -1;
+  border: solid black 5px;
 }

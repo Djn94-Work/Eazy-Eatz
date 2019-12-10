@@ -33,9 +33,7 @@ function Header(props) {
           size: "3em"
         }}
       >
-        <div>
-          <FaUserCircle className="userIcon" />
-        </div>
+        <FaUserCircle className="userIcon" />
       </IconContext.Provider>
     </div>
   );
