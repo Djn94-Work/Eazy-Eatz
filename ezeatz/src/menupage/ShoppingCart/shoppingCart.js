@@ -20,7 +20,7 @@ function ShoppingCart(props) {
           </div>
         ))}
       </div>
-      <div className="price">Price:{price}$</div>
+      <div className="price">Price:${price}</div>
     </div>
   );
 }

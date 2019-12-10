@@ -55,23 +55,31 @@ app.get("/search", (req, res) => {
                 open: restaurants[entry].open,
                 icon: ""
               });
-              promises.push(
-                axios.get("https://maps.googleapis.com/maps/api/place/photo?", {
-                  params: {
-                    maxwidth: restaurants[entry].photos[0].width,
-                    photoreference:
-                      restaurants[entry].photos[0].photo_reference,
-                    key: key
-                  }
-                })
-              );
+              if (restaurants[entry].photos) {
+                promises.push(
+                  axios.get(
+                    "https://maps.googleapis.com/maps/api/place/photo?",
+                    {
+                      params: {
+                        maxwidth: restaurants[entry].photos[0].width,
+                        photoreference:
+                          restaurants[entry].photos[0].photo_reference,
+                        key: key
+                      }
+                    }
+                  )
+                );
+              } else {
+                promises.push(setTimeout(() => null, 0));
+              }
             }
           }
           Promise.all(promises)
             .then(images => {
               for (let i = 0; i < images.length; i++) {
-                results[i.toString()].icon =
-                  images[i].request._redirectable._options.href;
+                if (images[i].request)
+                  results[i.toString()].icon =
+                    images[i].request._redirectable._options.href;
               }
               res.send(results);
               console.log("Restaurants Sent");
