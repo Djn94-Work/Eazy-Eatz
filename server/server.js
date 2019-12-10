@@ -42,6 +42,7 @@ app.get("/search", (req, res) => {
           let results = [];
           restaurants = restaurants.data.results;
           let promises = [];
+          console.log(restaurants[0].opening_hours.open_now);
           for (const entry in restaurants) {
             if (
               restaurants[entry].types.includes("restaurant") ||
@@ -52,7 +53,7 @@ app.get("/search", (req, res) => {
                 address: restaurants[entry].vicinity,
                 rating: restaurants[entry].rating,
                 user_ratings_total: restaurants[entry].user_ratings_total,
-                open: restaurants[entry].open,
+                open: restaurants[entry].opening_hours.open_now,
                 icon: ""
               });
               if (restaurants[entry].photos) {
