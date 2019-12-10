@@ -17,12 +17,8 @@
 }
 
 .userIcon {
-  margin-left: 92vw;
-  margin-top: -15vh;
-  z-index: -1;
+  top: 0;
+  right: 0;
+  position: absolute;
 }
-
-.global-class-name userIcon {
-  z-index: -1;
-  border: solid black 5px;
-}
+  
