@@ -4,7 +4,7 @@ import "./FilterPannel.css";
 
 function FilterPannel(props) {
   return (
-    <div style={{ width: "20vw" }}>
+    <div style={{ width: "20vw" }} className="filterPannel">
       <RadiusSlider handleSlide={props.handleSlide} radius={props.radius} />
       <div className="ButtonContainer">
         <button onClick={() => props.handleFilter("mexican")}>Mexican</button>

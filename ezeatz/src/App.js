@@ -1,9 +1,9 @@
 import React from "react";
 import "./App.css";
 import Header from "./header/Header";
-import FilterPannel from "./mainpage/FilterPannel/FilterPannel";
-import CardContainer from "./mainpage/Cards/CardContainer";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import Menu from "../src/menupage/menu";
+import MainPage from "./mainpage/mainPage";
 
 const axios = require("axios");
 
@@ -19,17 +19,28 @@ class App extends React.Component {
     };
   }
 
+  getSelectedCardName = () => {
+    const index = this.state.selectedCard;
+
+    if (index > -1 && index !== {}) {
+      return this.state.restaurants[index].name;
+    } else if (index === -1) {
+      return {};
+    } else {
+      console.error("The Card with index '" + index + "' dosent exist");
+      return {};
+    }
+  };
+
   handleSlide = rad => {
     this.setState({ radius: rad });
   };
 
   handleFilter = filter => {
     this.setState({ filter: filter });
-    console.log(this.state.filter);
   };
 
-  handleSubmit = (key, address) => {
-    this.setState({ address: address });
+  handleSubmit = (key, address, callback) => {
     if (key === "Enter") {
       axios
         .get(
@@ -43,10 +54,21 @@ class App extends React.Component {
           }
         )
         .then(results => {
-          this.setState({ restaurants: results.data });
-          console.log(results.data);
+          this.setState({
+            restaurants: results.data,
+            address: address
+          });
+          callback();
         });
     }
+  };
+
+  menuDidMount = () => {
+    this.setState({
+      radius: 0,
+      filter: "",
+      selectedCard: -1
+    });
   };
 
   render() {
@@ -55,26 +77,30 @@ class App extends React.Component {
         <Router>
           <Route path="/" exact={false}>
             <Header
+              handleSlide={this.handleSlide}
+              handleFilter={this.handleFilter}
+              radius={this.state.radius}
               handleSubmit={this.handleSubmit}
-              handleOnChange={this.handleOnChange}
             ></Header>
           </Route>
-
-          <Route path="/" exact={true}>
-            <div className="MainPage">
-              <FilterPannel
-                handleSlide={this.handleSlide}
-                handleFilter={this.handleFilter}
-                radius={this.state.radius}
-              />
-              <CardContainer
+          <div className="mainBody">
+            <Route path="/" exact={true} onChange={this.onRouteChange}>
+              <MainPage
                 selectedCard={card => this.setState({ selectedCard: card })}
                 RestaurantDetails={this.state.restaurants}
               />
-            </div>
-          </Route>
-          <Route path="/menu"></Route>
+            </Route>
+            <Route path="/menu" exact={true} onChange={this.onRouteChange}>
+              <Menu
+                menuDidMount={this.menuDidMount}
+                restaurantName={this.getSelectedCardName()}
+                cuisine={this.state.filter}
+                onRouteChange={this.onRouteChange}
+              />
+            </Route>
+          </div>
         </Router>
+        <div></div>
       </div>
     );
   }

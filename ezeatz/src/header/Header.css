@@ -1,0 +1,24 @@
+.Header {
+  margin: 0;
+  background-color: slategray;
+  border-bottom: solid 2px black;
+  height: 10vh;
+  width: 100%;
+  top: 0;
+  left: 0;
+  position: fixed;
+  z-index: 1;
+}
+
+.Header #filter {
+  border: solid 2px white;
+  height: 75%;
+  padding-left: 10vw;
+}
+
+.userIcon {
+  top: 0;
+  right: 0;
+  position: absolute;
+}
+  

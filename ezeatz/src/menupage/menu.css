@@ -1,0 +1,5 @@
+.gridDiv {
+  display: grid;
+  grid-template-columns: 70% 25%;
+  column-gap: 10%;
+}

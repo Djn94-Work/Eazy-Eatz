@@ -5,8 +5,7 @@ import CardHeader from "@material-ui/core/CardHeader";
 import CardMedia from "@material-ui/core/CardMedia";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import { borders } from "@material-ui/system";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles(() => ({
   card: {
@@ -22,34 +21,45 @@ const useStyles = makeStyles(() => ({
 export default function RestCard(props) {
   const classes = useStyles();
 
-  return (
-    <Link to="/menue" onClick={props.selectedCard} style={linkStyle}>
-      <Card className={classes.card}>
-        <CardHeader
-          title={props.title}
-          subheader={() => {
-            let resp = "";
-            if (props.open) {
-              resp = "OPEN";
-            } else {
-              resp = "CLOSE";
-            }
-            return resp;
-          }}
-        />
-        <CardMedia
-          className={classes.media}
-          image={props.image}
-          title="Paella dish"
-        />
-        <CardContent>
-          <Typography variant="body2" color="black" component="p">
-            {props.address}
-          </Typography>
-        </CardContent>
-      </Card>
+  const card = (
+    <Card className={classes.card}>
+      <CardHeader
+        title={props.title}
+        subheader={(() => {
+          let resp = "";
+          if (props.open) {
+            resp = "OPEN";
+          } else {
+            resp = "CLOSED";
+          }
+          return resp;
+        })()}
+      />
+      <CardMedia
+        className={classes.media}
+        image={props.image}
+        title="Paella dish"
+      />
+      <CardContent>
+        <Typography variant="body2" color="black" component="p">
+          {props.address}
+        </Typography>
+      </CardContent>
+    </Card>
+  );
+
+  let result;
+
+  // if (props.open) {
+  result = (
+    <Link to="/menu" onClick={props.selectedCard} style={linkStyle}>
+      {card}
     </Link>
   );
+  // } else {
+  //   result = card;
+  // }
+  return result;
 }
 
 const linkStyle = {

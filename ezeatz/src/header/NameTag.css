@@ -1,0 +1,9 @@
+.nameTag {
+  float: right;
+  margin-right: 42vw;
+  margin-top: -7.5vh;
+  z-index: 1;
+}
+.filterPannel {
+  float: left;
+}
