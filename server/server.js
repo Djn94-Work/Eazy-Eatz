@@ -48,12 +48,19 @@ app.get("/search", (req, res) => {
               restaurants[entry].types.includes("restaurant") ||
               restaurants[entry].types.includes("food")
             ) {
+              let open;
+              if (restaurants[entry].opening_hours) {
+                open = restaurants[entry].opening_hours.open_now;
+              } else {
+                open = "unknown";
+              }
+
               results.push({
                 name: restaurants[entry].name,
                 address: restaurants[entry].vicinity,
                 rating: restaurants[entry].rating,
                 user_ratings_total: restaurants[entry].user_ratings_total,
-                open: restaurants[entry].opening_hours.open_now,
+                open: open,
                 icon: ""
               });
               if (restaurants[entry].photos) {

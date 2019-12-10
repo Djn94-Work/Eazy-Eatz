@@ -27,7 +27,9 @@ export default function RestCard(props) {
         title={props.title}
         subheader={(() => {
           let resp = "";
-          if (props.open) {
+          if (props.open === "unknown") {
+            resp = "UNKOWN";
+          } else if (props.open) {
             resp = "OPEN";
           } else {
             resp = "CLOSED";
