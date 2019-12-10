@@ -9,6 +9,7 @@ function ShoppingCart(props) {
   }
   return (
     <div className="shoppingDiv">
+      <div className="nameDiv">Shopping Cart</div>
       <div className="cartDiv">
         {props.cart.map((card, index) => (
           <div
