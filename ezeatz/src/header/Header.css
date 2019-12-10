@@ -17,6 +17,8 @@
 }
 
 .userIcon {
-  margin-left: 92vw;
-  margin-top: -15vh;
+  top: 0;
+  right: 0;
+  position: absolute;
 }
+  

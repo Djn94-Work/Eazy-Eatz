@@ -25,6 +25,7 @@ function Header(props) {
           ></FilterPannel>
         </Select>
       </div>
+      <NameTag />
       <IconContext.Provider
         value={{
           color: "black",
@@ -32,9 +33,7 @@ function Header(props) {
           size: "3em"
         }}
       >
-        <div>
-          <FaUserCircle className="userIcon" />
-        </div>
+        <FaUserCircle className="userIcon" />
       </IconContext.Provider>
     </div>
   );

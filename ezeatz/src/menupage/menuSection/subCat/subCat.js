@@ -1,12 +1,13 @@
 import React from "react";
 import Button from "@material-ui/core/Button";
+import "./subCat.css";
 function Subcat(props) {
   const buttonBuilder = () => {
     const buttonArray = [];
     for (const subCat of props.subCatArray) {
       buttonArray.push(
         <Button
-          //style={{ zIndex: 1 }}
+          className="subCatButton"
           variant="contained"
           onClick={() => {
             props.handleButton(subCat);
