@@ -1,6 +1,12 @@
 import React from "react";
 import "./ShoppingCart.css";
 function ShoppingCart(props) {
+  let price = 0;
+  if (props.prices.length !== 0) {
+    price = props.prices.reduce(
+      (accumulator, currentValue) => accumulator + currentValue
+    );
+  }
   return (
     <div className="shoppingDiv">
       <div className="cartDiv">
@@ -14,7 +20,7 @@ function ShoppingCart(props) {
           </div>
         ))}
       </div>
-      <div className="price">Price:{props.price}$</div>
+      <div className="price">Price:{price}$</div>
     </div>
   );
 }
