@@ -25,7 +25,6 @@ function Header(props) {
           ></FilterPannel>
         </Select>
       </div>
-      <NameTag />
       <IconContext.Provider
         value={{
           color: "black",

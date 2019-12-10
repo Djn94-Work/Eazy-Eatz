@@ -6,6 +6,7 @@ function Subcat(props) {
     for (const subCat of props.subCatArray) {
       buttonArray.push(
         <Button
+          //style={{ zIndex: 1 }}
           variant="contained"
           onClick={() => {
             props.handleButton(subCat);

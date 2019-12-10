@@ -9,7 +9,8 @@ class MenuPage extends React.Component {
     this.state = {
       cart: [],
       subCat: "",
-      subCatArray: []
+      subCatArray: [],
+      price: 0
     };
   }
 
@@ -21,10 +22,10 @@ class MenuPage extends React.Component {
     this.setState({ subCat });
   };
 
-  addToCart = newItem => {
+  addToCart = (newItem, price) => {
     const tempCart = [...this.state.cart];
-    tempCart.push(<div onClick={this.removeFromCart}>{newItem}</div>);
-    this.setState({ cart: tempCart });
+    tempCart.push(newItem);
+    this.setState({ cart: tempCart, price: this.state.price + price });
   };
 
   removeFromCart = index => {
@@ -55,7 +56,11 @@ class MenuPage extends React.Component {
             ></CardWrap>
           </div>
           <div>
-            <ShoppingCart cart={this.state.cart}></ShoppingCart>
+            <ShoppingCart
+              cart={this.state.cart}
+              onClick={this.removeFromCart}
+              price={this.state.price}
+            ></ShoppingCart>
           </div>
         </div>
       </div>

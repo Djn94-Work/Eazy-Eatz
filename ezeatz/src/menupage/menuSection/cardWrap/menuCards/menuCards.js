@@ -28,7 +28,7 @@ export default function MenuCard(props) {
     </Card>
   );
   return (
-    <div className="cardHover" onClick={() => props.onClick(card)}>
+    <div className="cardHover" onClick={() => props.onClick(card, props.price)}>
       {card}
     </div>
   );
