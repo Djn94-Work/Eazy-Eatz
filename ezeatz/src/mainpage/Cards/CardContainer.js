@@ -15,7 +15,7 @@ function CardContainer(props) {
         selectedCard={() => props.selectedCard(search)}
         title={props.RestaurantDetails[search].name}
         open={props.RestaurantDetails[search].open}
-        image={props.RestaurantDetails[search].icon}
+        image={props.RestaurantDetails[search].icon} 
         address={props.RestaurantDetails[search].address}
       />
     );

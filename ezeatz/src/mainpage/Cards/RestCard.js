@@ -39,8 +39,8 @@ export default function RestCard(props) {
       />
       <CardMedia
         className={classes.media}
-        image={props.image}
-        title="Paella dish"
+        image={props.image} 
+        title={props.title}
       />
       <CardContent>
         <Typography variant="body2" color="black" component="p">

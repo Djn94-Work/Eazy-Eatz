@@ -85,10 +85,12 @@ app.get("/search", (req, res) => {
           Promise.all(promises)
             .then(images => {
               for (let i = 0; i < images.length; i++) {
-                if (images[i].request)
+                if (images[i].request) {
                   results[i.toString()].icon =
                     images[i].request._redirectable._options.href;
+                }
               }
+
               res.send(results);
               console.log("Restaurants Sent");
             })
